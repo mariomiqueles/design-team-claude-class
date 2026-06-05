@@ -1,0 +1,132 @@
+---
+layout: ../../layouts/Module.astro
+title: Prompting para Diseñadores
+description: Aprende a escribir prompts que den resultados útiles para UX research, wireframes, copy y más.
+module: 2
+level: beginner
+duration: 30 min
+---
+
+## La diferencia entre un prompt malo y uno bueno
+
+La calidad de la respuesta de Claude depende casi completamente de la calidad de tu pregunta.
+
+**Prompt vago:**
+```
+Dame ideas para una app de salud
+```
+
+**Prompt efectivo:**
+```
+Estoy diseñando una app móvil de seguimiento de hidratación para adultos mayores de 60 años.
+Los usuarios tienen poca experiencia con smartphones.
+Dame 5 ideas de flujos de onboarding que sean simples, con texto grande y sin fricción.
+```
+
+La diferencia está en: **contexto + audiencia + formato de respuesta**.
+
+---
+
+## La fórmula de un buen prompt para diseño
+
+```
+[Rol / contexto tuyo]
+[Descripción del producto o pantalla]
+[Usuario objetivo]
+[Lo que necesitas concretamente]
+[Formato de respuesta que quieres]
+```
+
+No necesitas usar todos los elementos siempre, pero cuantos más incluyas, mejor el resultado.
+
+---
+
+## Prompts listos para usar
+
+### Para UX Research
+
+```
+Actúa como un investigador UX senior. Estoy preparando entrevistas de usuario para [producto].
+Los usuarios son [descripción].
+Crea una guía de entrevista con 8 preguntas abiertas organizadas en:
+contexto actual, puntos de dolor, y comportamientos clave.
+```
+
+### Para Copy de interfaz
+
+```
+Necesito microcopy para un estado vacío en una app de gestión de tareas.
+El tono de la marca es amigable pero profesional.
+El usuario llega aquí cuando no tiene ninguna tarea pendiente.
+Dame 3 opciones de: título (máx 5 palabras), subtítulo (máx 15 palabras), y CTA.
+```
+
+### Para Análisis de flujos
+
+```
+Te comparto este flujo de checkout de un ecommerce:
+[pega aquí los pasos o una descripción del flujo]
+
+Analízalo desde la perspectiva de los principios de Nielsen.
+Identifica los 3 problemas principales y sugiere una solución concreta para cada uno.
+```
+
+### Para Documentación de componentes
+
+```
+Soy diseñadora de un design system. Necesito documentar el componente "Card de producto".
+El componente tiene: imagen, título, precio, badge de descuento opcional, y botón de acción.
+Escribe la documentación técnica en formato Markdown con: descripción, props, variantes, y notas de accesibilidad.
+```
+
+---
+
+## Técnica: el seguimiento iterativo
+
+Claude es poderoso cuando iteras. No intentes conseguir el resultado perfecto en un solo prompt.
+
+**Ejemplo de iteración:**
+
+1. *"Dame 5 nombres para una app de finanzas personales para millennials"*
+2. *"Me gustan el 2 y el 4. ¿Puedes dar 3 variaciones de cada uno?"*
+3. *"Combina la energía del nombre 2 con la simplicidad del nombre 4. Dame 3 opciones."*
+4. *"Perfecto. Ahora escribe un tagline de 6 palabras para la opción final."*
+
+---
+
+## Técnica: dar ejemplos (few-shot prompting)
+
+Si quieres que Claude siga un estilo específico, muéstrale ejemplos:
+
+```
+Necesito reescribir los mensajes de error de nuestra app.
+Nuestro tono es directo, sin jerga técnica, y siempre ofrece una solución.
+
+Ejemplo bueno: "No pudimos guardar tu archivo. Verifica tu conexión e intenta de nuevo."
+Ejemplo malo: "Error 503: Storage service unavailable."
+
+Ahora reescribe estos mensajes siguiendo el mismo tono:
+- "Authentication failed"
+- "Request timeout"
+- "Invalid input format"
+```
+
+---
+
+## Ejercicio práctico
+
+Elige uno de estos escenarios reales y escribe un prompt usando la fórmula que aprendiste:
+
+**Opción A:** Necesitas 3 variantes de copy para el botón principal de una pantalla de registro.
+
+**Opción B:** Quieres que Claude critique el flujo de tu última pantalla diseñada.
+
+**Opción C:** Necesitas definir los estados (vacío, cargando, error, éxito) de un componente de lista.
+
+Después de escribir tu prompt, prueba agregar: *"Ahora dame una versión más corta"* o *"¿Qué mejorarías de mi prompt?"*
+
+---
+
+## Próximo módulo
+
+El **Módulo 03** entra de lleno en design systems: cómo usar Claude para generar tokens, documentar componentes y mantener consistencia a escala.

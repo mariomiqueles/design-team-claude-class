@@ -1,0 +1,176 @@
+---
+layout: ../../layouts/Module.astro
+title: Skills y Claude Cowork
+description: Crea flujos de trabajo reutilizables con Skills y aprende a usar Claude Cowork para tareas complejas de diseño.
+module: 7
+level: advanced
+duration: 50 min
+---
+
+## Qué son los Skills
+
+Los Skills son **flujos de trabajo predefinidos** dentro de Claude Code. En lugar de escribir las mismas instrucciones largas cada vez, defines un skill una sola vez y lo invocas con un comando corto.
+
+**Analogía de diseño:** es como crear un componente en Figma. Una vez que está definido, lo reutilizas en cualquier pantalla sin rehacerlo.
+
+---
+
+## Por qué son útiles para diseñadores
+
+Piensa en las tareas que repites semana a semana:
+
+- Revisar accesibilidad de nuevos componentes
+- Generar documentación de un componente
+- Crear datos de prueba para una pantalla
+- Auditar si el código implementado respeta el design system
+
+Con Skills, cada una de esas tareas se convierte en un comando de una palabra.
+
+---
+
+## Cómo funciona un Skill
+
+Un Skill es un archivo Markdown dentro de la carpeta `.claude/skills/` de tu proyecto. Contiene instrucciones en lenguaje natural que Claude ejecuta cuando lo invocas con `/nombre-del-skill`.
+
+**Estructura básica:**
+
+```markdown
+---
+description: Documenta un componente del design system en formato estándar del equipo
+---
+
+Lee el componente en el archivo indicado.
+Genera documentación Markdown con estas secciones:
+1. Descripción y propósito
+2. Props con tipos y valores por defecto
+3. Variantes disponibles con descripción
+4. Estados (hover, focus, disabled, error)
+5. Guía de accesibilidad (aria-labels, roles, contraste)
+6. Ejemplos de uso correcto e incorrecto
+
+Usa los nombres de tokens de nuestro design system, no valores hardcodeados.
+El tono es técnico pero claro. El público es developers del equipo.
+```
+
+---
+
+## Crear tu primer Skill
+
+En tu terminal, dentro del proyecto donde tienes Claude Code:
+
+```bash
+# Crea la carpeta de skills si no existe
+mkdir -p .claude/skills
+
+# Crea el archivo del skill
+touch .claude/skills/doc-component.md
+```
+
+Pega el contenido del skill en ese archivo. Luego, dentro de Claude Code:
+
+```
+/doc-component src/components/Badge.tsx
+```
+
+Claude ejecuta el skill sobre ese archivo específico.
+
+---
+
+## Skills útiles para el equipo de diseño
+
+### `audit-a11y` — Auditoría de accesibilidad
+
+```markdown
+---
+description: Audita un componente o página para accesibilidad WCAG 2.1 AA
+---
+
+Analiza el archivo indicado y revisa:
+- Contraste de colores
+- Uso correcto de roles ARIA
+- Orden lógico del foco de teclado
+- Alt text en imágenes
+- Labels en formularios
+
+Genera un reporte con: checked correcto, warning mejorable, error problema crítico.
+Para cada problema crítico, da la corrección exacta.
+```
+
+### `gen-test-data` — Datos de prueba
+
+```markdown
+---
+description: Genera datos de prueba realistas para poblar diseños
+---
+
+El usuario indicará el tipo de pantalla o componente.
+Genera entre 5 y 15 filas de datos realistas en formato JSON.
+Los datos deben ser en español latinoamericano, nombres y empresas plausibles.
+Incluye casos edge: texto muy largo, campos vacíos opcionales, estados especiales.
+```
+
+### `ds-consistency` — Revisar consistencia con el design system
+
+```markdown
+---
+description: Revisa si el código usa correctamente los tokens del design system
+---
+
+Analiza el archivo indicado y detecta:
+- Colores hardcodeados en lugar de tokens
+- Espaciados que no siguen la escala definida
+- Tipografía que no usa las clases del sistema
+- Componentes reimplementados en lugar de importados
+
+Da un listado de problemas con la línea exacta y la corrección sugerida.
+```
+
+---
+
+## Claude Cowork
+
+Claude Cowork es una funcionalidad que permite lanzar **múltiples agentes de Claude trabajando en paralelo**, cada uno especializado en una parte de una tarea grande.
+
+### Ejemplo: Rediseño de pantalla completa
+
+En lugar de hacer todo en una conversación lineal, Cowork puede:
+
+- **Agente 1:** Analizar los resultados de research y extraer insights
+- **Agente 2:** Generar 3 propuestas de IA estructurada de la pantalla
+- **Agente 3:** Escribir el microcopy de todas las opciones
+- **Agente 4:** Crear la documentación de accesibilidad
+
+Todos trabajan simultáneamente y sus resultados se consolidan.
+
+---
+
+## Cómo activar Cowork
+
+Desde Claude Code, puedes invocar el modo cowork:
+
+```
+/cowork Necesito preparar la documentación completa del componente DataTable:
+- Un agente que documente las props y variantes
+- Un agente que escriba los ejemplos de uso
+- Un agente que haga la auditoría de accesibilidad
+Consolida los tres resultados en un solo archivo DataTable.md
+```
+
+> **Nota:** Cowork está disponible en planes profesionales de Claude. Verifica tu plan en console.anthropic.com.
+
+---
+
+## Ejercicio práctico
+
+1. **Crea la carpeta** `.claude/skills/` en un proyecto tuyo
+2. **Escribe un skill** para la tarea repetitiva que más realizas en tu trabajo
+3. **Pruébalo** sobre un archivo real de tu proyecto
+4. **Itera** — ajusta las instrucciones según el resultado que obtengas
+
+Comparte el skill con el equipo agregándolo al repositorio del design system.
+
+---
+
+## Próximo módulo
+
+El **Módulo 08** es el más avanzado: crear agentes propios que automaticen flujos de diseño completos, desde research hasta entrega.

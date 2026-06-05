@@ -1,0 +1,50 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const base = import.meta.env.BASE_URL;
+
+const modules = [
+  { num: '01', slug: '01-introduccion',  level: 'beginner',     title: 'Introducción a Claude',           duration: '20 min' },
+  { num: '02', slug: '02-prompting',     level: 'beginner',     title: 'Prompting para Diseñadores',      duration: '30 min' },
+  { num: '03', slug: '03-design-systems',level: 'intermediate', title: 'Claude y Design Systems',         duration: '45 min' },
+  { num: '04', slug: '04-proyectos',     level: 'intermediate', title: 'Claude Projects',                 duration: '30 min' },
+  { num: '05', slug: '05-artefactos',    level: 'intermediate', title: 'Artifacts y Prototipos',          duration: '40 min' },
+  { num: '06', slug: '06-claude-code',   level: 'advanced',     title: 'Claude Code para Diseñadores',    duration: '60 min' },
+  { num: '07', slug: '07-skills-cowork', level: 'advanced',     title: 'Skills y Claude Cowork',          duration: '50 min' },
+  { num: '08', slug: '08-agentes',       level: 'advanced',     title: 'Agentes y Automatizaciones',      duration: '60 min' },
+];
+
+const levelColor: Record<string, string> = {
+  beginner:     'bg-emerald-900/60 text-emerald-300 border-emerald-800',
+  intermediate: 'bg-blue-900/60 text-blue-300 border-blue-800',
+  advanced:     'bg-purple-900/60 text-purple-300 border-purple-800',
+};
+const levelLabel: Record<string, string> = {
+  beginner: 'Principiante', intermediate: 'Intermedio', advanced: 'Avanzado',
+};
+---
+<Base title="Módulos">
+  <div class="max-w-4xl mx-auto px-4 py-16">
+    <h1 class="text-4xl font-bold text-white mb-3">Todos los módulos</h1>
+    <p class="text-slate-400 mb-12">Puedes empezar desde el principio o saltar al nivel que corresponda.</p>
+
+    <div class="flex flex-col gap-3">
+      {modules.map(m => (
+        <a
+          href={`${base}/modulos/${m.slug}`}
+          class="group flex items-center gap-6 bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-slate-600 rounded-xl p-5 transition-all"
+        >
+          <span class="text-2xl font-bold font-mono text-slate-600 group-hover:text-slate-400 w-8 shrink-0">{m.num}</span>
+          <div class="flex-1 min-w-0">
+            <h2 class="font-semibold text-white group-hover:text-brand-400 transition-colors">{m.title}</h2>
+          </div>
+          <div class="flex items-center gap-3 shrink-0">
+            <span class={`text-xs px-2.5 py-1 rounded-full border font-medium ${levelColor[m.level]}`}>{levelLabel[m.level]}</span>
+            <span class="text-slate-500 text-sm">{m.duration}</span>
+            <span class="text-slate-600 group-hover:text-brand-400 transition-colors">→</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</Base>

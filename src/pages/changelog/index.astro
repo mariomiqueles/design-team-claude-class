@@ -1,0 +1,57 @@
+---
+import Base from '../../layouts/Base.astro';
+
+// Lee las entradas del changelog desde el archivo de datos
+let entries: Array<{ date: string; version: string; title: string; summary: string; modules: string[] }> = [];
+try {
+  const data = await import('../../data/changelog.json');
+  entries = data.default;
+} catch {
+  entries = [];
+}
+---
+<Base title="Novedades de Claude" description="Historial de actualizaciones de Claude y qué aprender nuevo en el curso">
+  <div class="max-w-3xl mx-auto px-4 py-16">
+
+    <div class="mb-12">
+      <h1 class="text-4xl font-bold text-white mb-3">Novedades de Claude</h1>
+      <p class="text-slate-400 text-lg">Cada vez que Anthropic lanza una actualización, esta página se actualiza automáticamente y se envía una notificación al equipo.</p>
+    </div>
+
+    {entries.length === 0 ? (
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-8 text-center">
+        <p class="text-slate-500">Aún no hay entradas de changelog. Se generarán automáticamente cuando Claude lance una actualización.</p>
+      </div>
+    ) : (
+      <div class="relative">
+        <div class="absolute left-4 top-0 bottom-0 w-px bg-slate-800"></div>
+        <div class="flex flex-col gap-10">
+          {entries.map(entry => (
+            <div class="pl-12 relative">
+              <div class="absolute left-2.5 top-1.5 w-3 h-3 rounded-full bg-brand-500 border-2 border-slate-950"></div>
+              <div class="text-sm text-slate-500 mb-1 font-mono">{entry.date}</div>
+              <div class="bg-slate-900 border border-slate-800 rounded-xl p-6">
+                <div class="flex items-start justify-between gap-4 mb-3">
+                  <h2 class="text-lg font-semibold text-white">{entry.title}</h2>
+                  <span class="shrink-0 text-xs bg-brand-900/60 text-brand-300 border border-brand-800 px-2.5 py-1 rounded-full font-mono">{entry.version}</span>
+                </div>
+                <p class="text-slate-400 text-sm leading-relaxed mb-4">{entry.summary}</p>
+                {entry.modules.length > 0 && (
+                  <div>
+                    <p class="text-xs text-slate-500 mb-2">Módulos relacionados:</p>
+                    <div class="flex flex-wrap gap-2">
+                      {entry.modules.map(m => (
+                        <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded-lg">{m}</span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+
+  </div>
+</Base>

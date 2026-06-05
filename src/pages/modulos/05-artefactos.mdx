@@ -1,0 +1,130 @@
+---
+layout: ../../layouts/Module.astro
+title: Artifacts y Prototipos
+description: Crea prototipos interactivos, specs de componentes y documentos listos para usar directamente desde Claude.
+module: 5
+level: intermediate
+duration: 40 min
+---
+
+## Qué son los Artifacts
+
+Cuando le pides a Claude que cree algo concreto — código, un documento, una tabla — aparece en un panel lateral llamado **Artifact**. Desde ahí puedes:
+
+- **Copiarlo** al portapapeles
+- **Descargarlo** como archivo
+- **Editarlo** directamente en el panel
+- **Pedirle a Claude que lo modifique** sin perder la conversación
+
+Los Artifacts son la diferencia entre Claude como "chatbot de respuestas" y Claude como "herramienta de producción".
+
+---
+
+## Tipos de Artifacts útiles para diseño
+
+| Tipo | Qué puedes crear |
+|------|-----------------|
+| HTML/CSS | Prototipos interactivos, componentes visuales |
+| Markdown | Documentación, specs, guías |
+| SVG | Iconos, diagramas, ilustraciones simples |
+| JSON | Tokens de diseño, datos de prueba |
+| Mermaid | Diagramas de flujo, arquitectura de información |
+
+---
+
+## Crear un prototipo HTML en minutos
+
+```
+Crea un prototipo HTML/CSS de una tarjeta de producto para un ecommerce.
+La card incluye: imagen placeholder, nombre del producto, precio actual,
+precio tachado si hay descuento, badge "Nuevo" opcional, y botón "Agregar al carrito".
+
+Usa CSS moderno (Grid, Flexbox, custom properties para los colores).
+Colores: fondo blanco, acento #4F6BF0, texto #111827.
+Debe verse bien en 320px y 768px de ancho.
+No uses frameworks externos.
+```
+
+Claude genera el HTML completo. Puedes abrirlo en el navegador para revisarlo o enviárselo al equipo de desarrollo como referencia.
+
+---
+
+## Iterar sobre el prototipo
+
+Una vez generado, puedes pedirle cambios específicos:
+
+- *"Agrega un estado hover con sombra suave"*
+- *"El precio tachado debe estar en gris, no en rojo"*
+- *"Agrega una variante horizontal para la vista de lista"*
+- *"¿Cómo le agregaría accesibilidad? Incluye los aria-labels necesarios"*
+
+Cada respuesta actualiza el Artifact sin perder la conversación.
+
+---
+
+## Crear diagramas de flujo con Mermaid
+
+```
+Crea un diagrama de flujo del proceso de onboarding de una app de finanzas.
+El flujo empieza con el registro, incluye verificación de identidad,
+configuración de perfil y primera transacción.
+Usa el formato Mermaid.
+```
+
+Claude genera código Mermaid que puedes pegar directamente en Notion, GitHub, o cualquier herramienta compatible.
+
+---
+
+## Generar datos de prueba realistas
+
+Uno de los usos más prácticos para diseñadores:
+
+```
+Necesito datos de prueba para poblar una tabla de transacciones financieras.
+Dame 10 filas en JSON con estos campos:
+- id (formato TXN-0001)
+- fecha (últimos 30 días, variadas)
+- descripción (nombres de comercios reales y plausibles)
+- monto (entre -5000 y 5000 USD, negativos son gastos)
+- categoría (de esta lista: Alimentación, Transporte, Servicios, Entretenimiento, Salud)
+- estado: completed, pending, o failed (90% completed)
+```
+
+Pega el JSON en tu herramienta de diseño o en el prototipo directamente.
+
+---
+
+## Crear una spec de componente lista para devs
+
+```
+Genera una especificación técnica para el componente "Notification Toast" de nuestro design system.
+Variantes: success, warning, error, info.
+Posición: top-right por defecto, configurable.
+Duración: 4 segundos por defecto, configurable. Con opción de cierre manual.
+
+La spec debe incluir:
+- Descripción del comportamiento
+- Props con tipos TypeScript
+- Tokens de color usados (nombrados, no valores hex)
+- Animaciones de entrada y salida (describe el easing y timing)
+- Accesibilidad: rol ARIA, manejo de foco
+Formato Markdown, listo para copiar a Confluence.
+```
+
+---
+
+## Ejercicio práctico
+
+Elige una pantalla o componente de tu trabajo actual y crea:
+
+1. **Un prototipo HTML** — pídele a Claude que implemente visualmente el componente o la pantalla
+2. **Un diagrama Mermaid** — del flujo de usuario de esa misma pantalla
+3. **10 filas de datos de prueba** — para poblar el diseño con contenido realista
+
+Al finalizar, tendrás tres entregables reales generados en menos de 15 minutos.
+
+---
+
+## Próximo módulo
+
+El **Módulo 06** introduce Claude Code: la herramienta de línea de comandos que permite automatizar tareas repetitivas, editar archivos y trabajar con tu repositorio.

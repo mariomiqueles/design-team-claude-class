@@ -1,0 +1,9 @@
+[
+  {
+    "date": "2026-06-04",
+    "version": "Claude 4 Sonnet",
+    "title": "Lanzamiento del sitio de aprendizaje",
+    "summary": "Primera versión del sitio con 8 módulos completos, desde introducción hasta agentes y automatizaciones. Todos los módulos incluyen ejercicios prácticos con ejemplos reales de UX/UI y design systems.",
+    "modules": ["Módulo 01", "Módulo 02", "Módulo 03", "Módulo 04", "Módulo 05", "Módulo 06", "Módulo 07", "Módulo 08"]
+  }
+]

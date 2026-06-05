@@ -1,0 +1,136 @@
+---
+layout: ../../layouts/Module.astro
+title: Claude Projects
+description: Crea espacios de trabajo persistentes para cada cliente o producto, con contexto siempre disponible.
+module: 4
+level: intermediate
+duration: 30 min
+---
+
+## El problema que resuelven los Projects
+
+Sin Projects, cada conversación con Claude empieza de cero. Tienes que repetir:
+- El nombre del cliente y el contexto del producto
+- El tono de la marca
+- Los archivos de referencia
+- Las restricciones del proyecto
+
+**Claude Projects** resuelve esto: creas un espacio donde Claude ya sabe todo eso antes de que escribas tu primer mensaje.
+
+---
+
+## Qué es un Project
+
+Un Project es un espacio en claude.ai que tiene:
+
+- **Instrucciones del proyecto** — texto que Claude lee en cada conversación (el "system prompt")
+- **Archivos adjuntos** — PDFs, imágenes, documentos que Claude puede consultar
+- **Historial de conversaciones** — todas las chats dentro del proyecto quedan guardadas
+
+Puedes tener múltiples proyectos: uno por cliente, uno por producto, uno para tu design system.
+
+---
+
+## Cómo crear un Project
+
+1. En claude.ai, haz clic en **"Projects"** en la barra lateral
+2. Clic en **"New Project"**
+3. Dale un nombre descriptivo: *"Rediseño App Fintech — Cliente X"*
+4. En la sección **"Project Instructions"**, escribe el contexto
+
+---
+
+## Qué escribir en las instrucciones del proyecto
+
+Este es el texto más importante. Incluye todo lo que no quieres repetir en cada chat:
+
+```
+## Contexto del proyecto
+Estoy rediseñando la app móvil de [Cliente X], una plataforma de pagos B2B para PyMEs en Latinoamérica.
+
+## Usuarios objetivo
+CFOs y contadores de empresas de 10-100 empleados. Promedio de edad 35-50 años.
+Usan la app principalmente en desktop, con accesos mobile ocasionales.
+
+## Tono y voz
+Profesional, directo, sin jerga financiera innecesaria. Cercano pero no informal.
+
+## Stack de diseño
+- Figma para diseño
+- React + Tailwind en el frontend
+- Design system propio basado en Radix UI
+
+## Restricciones conocidas
+- No podemos usar animaciones complejas (performance en dispositivos viejos)
+- Accessibility: WCAG AA mínimo
+- El equipo de dev solo acepta especificaciones en formato de tabla o código
+
+## Mi rol
+Soy la UX lead del proyecto. Trabajo con un visual designer y dos developers.
+```
+
+---
+
+## Adjuntar archivos al proyecto
+
+Puedes subir documentos que Claude consultará:
+
+| Archivo | Para qué sirve |
+|---------|---------------|
+| Brief del cliente (PDF) | Claude entiende el negocio sin que lo repitas |
+| Guidelines de marca | Claude respeta colores, tipografía y tono |
+| Guía del design system | Claude referencia nombres reales de componentes |
+| Resultados de research | Claude basa sugerencias en datos reales |
+| Anotaciones de Figma (PDF export) | Claude puede revisar flujos específicos |
+
+> **Límite actual:** Claude admite hasta 200.000 tokens de contexto por proyecto (aprox. 150.000 palabras). Más que suficiente para la documentación de la mayoría de proyectos.
+
+---
+
+## Ejemplo de uso real
+
+Con el project configurado, una conversación típica se ve así:
+
+**Tú:** *"Necesito escribir los mensajes de error del módulo de facturas. Dame 5 errores comunes y el microcopy para cada uno."*
+
+**Claude** ya sabe: el tono de la marca, que los usuarios son contadores, que el producto es de pagos B2B, y que el copy debe ser sin jerga. Responde directamente al punto.
+
+Sin project habrías tenido que pegar todo ese contexto en el mensaje.
+
+---
+
+## Projects para el design system del equipo
+
+Una idea especialmente útil: crear un **Project dedicado al design system** compartido del equipo.
+
+Instrucciones sugeridas:
+```
+Este proyecto es para trabajar con el design system de Leniolabs/Improving.
+Nombre del sistema: [nombre]
+Tecnología: [React / Vue / etc]
+Librería de iconos: [Lucide / Heroicons / etc]
+Tokens disponibles: [lista los más importantes o adjunta el JSON]
+Principios de diseño del sistema: [los principales]
+
+Cuando documentes componentes, usa siempre el formato estándar del equipo.
+Cuando generes código, usa las clases/tokens del sistema, no valores hardcodeados.
+```
+
+---
+
+## Ejercicio práctico
+
+Crea un Project para un proyecto real en el que estés trabajando:
+
+1. Ve a claude.ai → Projects → New Project
+2. Escribe instrucciones con al menos: contexto del producto, usuario objetivo, tono de marca, y tu rol
+3. Adjunta al menos un documento (brief, guidelines, o screenshot de tu design system)
+4. Inicia una conversación dentro del proyecto y pídele ayuda con una tarea real
+
+Después compara la calidad de la respuesta vs. una conversación sin project.
+
+---
+
+## Próximo módulo
+
+El **Módulo 05** cubre los Artifacts: cómo pedirle a Claude que cree prototipos HTML, specs de componentes y documentos listos para usar.

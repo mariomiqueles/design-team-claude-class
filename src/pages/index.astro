@@ -1,0 +1,126 @@
+---
+import Base from '../layouts/Base.astro';
+
+const base = import.meta.env.BASE_URL;
+
+const modules = [
+  {
+    num: '01', slug: '01-introduccion', level: 'beginner',
+    title: 'Introducción a Claude',
+    desc: 'Qué es Claude, cómo acceder y primeros pasos desde una perspectiva de diseño.',
+    duration: '20 min',
+  },
+  {
+    num: '02', slug: '02-prompting', level: 'beginner',
+    title: 'Prompting para Diseñadores',
+    desc: 'Cómo escribir prompts efectivos para tareas de UX, wireframes y contenido.',
+    duration: '30 min',
+  },
+  {
+    num: '03', slug: '03-design-systems', level: 'intermediate',
+    title: 'Claude y Design Systems',
+    desc: 'Genera tokens, documenta componentes y mantén consistencia con IA.',
+    duration: '45 min',
+  },
+  {
+    num: '04', slug: '04-proyectos', level: 'intermediate',
+    title: 'Claude Projects',
+    desc: 'Organiza el contexto de cada cliente o producto en proyectos separados.',
+    duration: '30 min',
+  },
+  {
+    num: '05', slug: '05-artefactos', level: 'intermediate',
+    title: 'Artifacts y Prototipos',
+    desc: 'Crea prototipos HTML, specs de componentes y flujos directamente en Claude.',
+    duration: '40 min',
+  },
+  {
+    num: '06', slug: '06-claude-code', level: 'advanced',
+    title: 'Claude Code para Diseñadores',
+    desc: 'Usa Claude Code para automatizar tareas sin necesitar saber programar.',
+    duration: '60 min',
+  },
+  {
+    num: '07', slug: '07-skills-cowork', level: 'advanced',
+    title: 'Skills y Claude Cowork',
+    desc: 'Crea flujos de trabajo personalizados y colabora con agentes especializados.',
+    duration: '50 min',
+  },
+  {
+    num: '08', slug: '08-agentes', level: 'advanced',
+    title: 'Agentes y Automatizaciones',
+    desc: 'Diseña agentes propios que automaticen tu flujo de diseño de extremo a extremo.',
+    duration: '60 min',
+  },
+];
+
+const levelColor: Record<string, string> = {
+  beginner:     'bg-emerald-900/60 text-emerald-300 border-emerald-800',
+  intermediate: 'bg-blue-900/60 text-blue-300 border-blue-800',
+  advanced:     'bg-purple-900/60 text-purple-300 border-purple-800',
+};
+const levelLabel: Record<string, string> = {
+  beginner: 'Principiante', intermediate: 'Intermedio', advanced: 'Avanzado',
+};
+---
+<Base title="Inicio">
+
+  <!-- Hero -->
+  <section class="max-w-6xl mx-auto px-4 pt-20 pb-16 text-center">
+    <div class="inline-flex items-center gap-2 bg-brand-900/40 border border-brand-700/50 text-brand-400 text-sm px-4 py-1.5 rounded-full mb-8">
+      <span class="w-2 h-2 rounded-full bg-brand-400 animate-pulse"></span>
+      Actualizado automáticamente con cada release de Claude
+    </div>
+    <h1 class="text-5xl sm:text-6xl font-bold text-white mb-6 leading-tight">
+      Claude para<br/>
+      <span class="text-brand-500">Diseño UX/UI</span>
+    </h1>
+    <p class="text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+      De cero a avanzado. Aprende a integrar Claude en tu flujo de diseño y design systems — a tu propio ritmo, sin necesidad de cuenta.
+    </p>
+    <div class="flex flex-wrap items-center justify-center gap-4">
+      <a href={`${base}/modulos/01-introduccion`} class="bg-brand-500 hover:bg-brand-600 text-white font-semibold px-6 py-3 rounded-xl transition-colors">
+        Empezar desde cero →
+      </a>
+      <a href={`${base}/modulos/06-claude-code`} class="border border-slate-700 hover:border-slate-500 text-slate-300 hover:text-white px-6 py-3 rounded-xl transition-colors">
+        Ya tengo experiencia, ir a avanzado
+      </a>
+    </div>
+  </section>
+
+  <!-- Level legend -->
+  <section class="max-w-6xl mx-auto px-4 mb-8">
+    <div class="flex flex-wrap items-center justify-center gap-4 text-sm">
+      <span class="text-slate-500">Niveles:</span>
+      <span class="px-3 py-1 rounded-full border bg-emerald-900/60 text-emerald-300 border-emerald-800">Principiante</span>
+      <span class="px-3 py-1 rounded-full border bg-blue-900/60 text-blue-300 border-blue-800">Intermedio</span>
+      <span class="px-3 py-1 rounded-full border bg-purple-900/60 text-purple-300 border-purple-800">Avanzado</span>
+    </div>
+  </section>
+
+  <!-- Modules grid -->
+  <section class="max-w-6xl mx-auto px-4 pb-20">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {modules.map(m => (
+        <a
+          href={`${base}/modulos/${m.slug}`}
+          class="group bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-slate-600 rounded-2xl p-6 transition-all duration-200"
+        >
+          <div class="flex items-start justify-between mb-4">
+            <span class="text-3xl font-bold text-slate-700 font-mono group-hover:text-slate-500 transition-colors">{m.num}</span>
+            <span class={`text-xs px-2.5 py-1 rounded-full border font-medium ${levelColor[m.level]}`}>
+              {levelLabel[m.level]}
+            </span>
+          </div>
+          <h2 class="text-lg font-semibold text-white mb-2 group-hover:text-brand-400 transition-colors">{m.title}</h2>
+          <p class="text-slate-400 text-sm leading-relaxed mb-4">{m.desc}</p>
+          <div class="flex items-center justify-between text-xs text-slate-500">
+            <span>⏱ {m.duration}</span>
+            <span class="group-hover:text-brand-400 transition-colors">Leer →</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+</Base>

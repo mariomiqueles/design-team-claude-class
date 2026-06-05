@@ -1,0 +1,158 @@
+---
+layout: ../../layouts/Module.astro
+title: Agentes y Automatizaciones
+description: Crea agentes personalizados que automaticen flujos completos de diseño, desde research hasta entrega.
+module: 8
+level: advanced
+duration: 60 min
+---
+
+## Qué es un agente de IA
+
+Un agente es un sistema que puede **tomar decisiones y ejecutar pasos de forma autónoma** para completar una tarea, sin que tengas que dirigir cada paso.
+
+La diferencia con un chat normal:
+
+| Chat normal | Agente |
+|-------------|--------|
+| Tú diriges cada paso | El agente planifica y ejecuta |
+| Una respuesta a la vez | Múltiples pasos encadenados |
+| Solo responde | Lee archivos, escribe, ejecuta comandos |
+| Contexto de una conversación | Puede persistir estado entre sesiones |
+
+---
+
+## Por qué los diseñadores deberían usar agentes
+
+Tareas que hoy toman horas y puedes automatizar con un agente:
+
+- **Auditoría de design system:** revisa todos los componentes, detecta inconsistencias, genera reporte
+- **Preparación de handoff:** toma los archivos exportados y genera specs para devs
+- **Research synthesis:** procesa entrevistas transcritas y genera un reporte de insights
+- **Changelog de componentes:** detecta cambios en el código y documenta qué cambió
+
+---
+
+## Anatomy de un agente con Claude
+
+Un agente necesita tres cosas:
+
+1. **Instrucciones** — qué hace, cómo decide, qué herramientas tiene
+2. **Herramientas** — las acciones que puede ejecutar (leer archivos, buscar, escribir)
+3. **Loop** — la lógica de cuándo termina
+
+Con Claude Code, puedes crear un agente escribiendo un skill suficientemente detallado.
+
+---
+
+## Agente 1: Auditor de Design System
+
+Crea este archivo en `.claude/skills/audit-design-system.md`:
+
+```markdown
+---
+description: Audita el design system completo y genera un reporte de inconsistencias
+---
+
+Ejecuta los siguientes pasos en orden:
+
+1. Lista todos los archivos de componentes en src/components/
+2. Para cada componente, verifica:
+   a. ¿Usa tokens de color del sistema o valores hardcodeados?
+   b. ¿Tiene tipos TypeScript correctos?
+   c. ¿Exporta las variantes documentadas?
+   d. ¿Tiene aria-labels cuando corresponde?
+
+3. Genera un archivo AUDIT-REPORT.md con:
+   - Resumen ejecutivo (totales: componentes revisados, problemas críticos, advertencias)
+   - Tabla de componentes con estado: OK / WARNING / ERROR
+   - Lista detallada de problemas por componente con línea exacta
+   - Recomendaciones prioritizadas (P1, P2, P3)
+
+4. Si encuentras más de 5 problemas críticos, crea también un archivo ISSUES.md
+   con cada problema en formato de issue de GitHub.
+```
+
+Invócalo con:
+```
+/audit-design-system
+```
+
+---
+
+## Agente 2: Generador de Handoff Docs
+
+```markdown
+---
+description: Genera documentación de handoff a partir de componentes implementados
+---
+
+Para el componente indicado:
+
+1. Lee el archivo del componente
+2. Extrae: nombre, props, variantes, estados
+3. Lee los estilos asociados y extrae tokens usados
+4. Genera el documento de handoff en formato Markdown
+5. Guarda el archivo como docs/handoff/[NombreComponente].md
+```
+
+---
+
+## Agente con la API de Anthropic
+
+Para agentes más autónomos, puedes usar la API directamente con el SDK de Python o JavaScript. El patrón básico es:
+
+1. **Definir herramientas** — acciones que el agente puede ejecutar (leer archivos, escribir, buscar)
+2. **Enviar la tarea** — el agente planifica y decide qué herramientas usar
+3. **Loop de ejecución** — el agente itera hasta completar la tarea
+
+Claude ejecuta los pasos necesarios, llama a las herramientas que necesite, y te devuelve el resultado final. No necesitas especificar cada paso.
+
+---
+
+## Construir un plugin para Figma con Claude
+
+Un plugin de Figma es JavaScript que se ejecuta dentro de Figma. Con Claude Code puedes generarlo en minutos:
+
+```
+Quiero crear un plugin de Figma que:
+- Seleccione todos los frames de la página actual
+- Para cada frame, extraiga el nombre y las dimensiones
+- Genere un CSV con esa información
+- Muestre un botón para descargarlo
+
+Genera el código del plugin en: manifest.json, ui.html, y code.js
+Sigue la estructura estándar de plugins de Figma.
+```
+
+Claude genera los tres archivos. Luego en Figma:
+1. Plugins → Development → Import plugin from manifest
+2. Selecciona tu `manifest.json`
+3. El plugin aparece en tu lista
+
+---
+
+## Ejercicio final
+
+Elige **uno** de estos proyectos y arma el agente:
+
+**Opción A — Fácil:** Crea un skill que tome un nombre de componente y genere automáticamente su documentación + datos de prueba + spec de handoff en un solo archivo.
+
+**Opción B — Intermedio:** Crea un skill que revise toda la carpeta de componentes y genere un índice actualizado en `COMPONENTS.md` con nombre, descripción, y nivel de documentación de cada uno.
+
+**Opción C — Avanzado:** Con ayuda de un developer del equipo, implementa un agente con la API de Anthropic que monitoree cambios en el repositorio y actualice automáticamente la documentación de los componentes que cambiaron.
+
+---
+
+## Terminaste el curso
+
+Llegaste al final del recorrido. Ahora sabes:
+
+- Usar Claude efectivamente para tareas de diseño y design systems
+- Organizar tu trabajo con Projects y contexto persistente
+- Crear prototipos y specs con Artifacts
+- Automatizar tareas repetitivas con Claude Code
+- Construir flujos reutilizables con Skills
+- Diseñar agentes autónomos para tareas complejas
+
+El siguiente paso es **aplicarlo en tu trabajo real** esta semana. Elige la herramienta de este curso que más impacto tenga en tu flujo actual y empieza ahí.

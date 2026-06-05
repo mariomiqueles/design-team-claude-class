@@ -1,0 +1,79 @@
+---
+import Base from './Base.astro';
+
+export interface Props {
+  title: string;
+  description?: string;
+  module: number;
+  level: 'beginner' | 'intermediate' | 'advanced';
+  duration: string;
+  // MDX passes frontmatter here too
+  frontmatter?: {
+    title: string;
+    description?: string;
+    module: number;
+    level: 'beginner' | 'intermediate' | 'advanced';
+    duration: string;
+  };
+}
+
+const fm = Astro.props.frontmatter ?? Astro.props;
+const { title, description, module: mod, level, duration } = fm;
+
+const levelConfig = {
+  beginner:     { label: 'Principiante', color: 'bg-emerald-900 text-emerald-300' },
+  intermediate: { label: 'Intermedio',   color: 'bg-blue-900 text-blue-300' },
+  advanced:     { label: 'Avanzado',     color: 'bg-purple-900 text-purple-300' },
+};
+const lv = levelConfig[level] ?? levelConfig.beginner;
+const base = import.meta.env.BASE_URL;
+---
+<Base title={title} description={description}>
+  <div class="max-w-3xl mx-auto px-4 py-12">
+
+    <!-- Breadcrumb -->
+    <nav class="text-sm text-slate-500 mb-8 flex items-center gap-2">
+      <a href={base} class="hover:text-white transition-colors">Inicio</a>
+      <span>/</span>
+      <a href={`${base}/modulos`} class="hover:text-white transition-colors">Módulos</a>
+      <span>/</span>
+      <span class="text-slate-300">Módulo {mod}</span>
+    </nav>
+
+    <!-- Header -->
+    <div class="mb-10">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="text-slate-500 text-sm font-mono">Módulo {String(mod).padStart(2, '0')}</span>
+        <span class={`text-xs px-2 py-0.5 rounded-full font-medium ${lv.color}`}>{lv.label}</span>
+        <span class="text-slate-500 text-sm">{duration}</span>
+      </div>
+      <h1 class="text-4xl font-bold text-white mb-3">{title}</h1>
+      {description && <p class="text-slate-400 text-lg leading-relaxed">{description}</p>}
+    </div>
+
+    <!-- Content -->
+    <article class="prose prose-invert prose-slate max-w-none
+      prose-headings:font-semibold
+      prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4 prose-h2:border-b prose-h2:border-slate-800 prose-h2:pb-2
+      prose-h3:text-lg prose-h3:mt-8 prose-h3:mb-3
+      prose-p:text-slate-300 prose-p:leading-7
+      prose-a:text-brand-500 prose-a:no-underline hover:prose-a:underline
+      prose-code:text-amber-300 prose-code:bg-slate-800 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:font-mono prose-code:before:content-none prose-code:after:content-none
+      prose-pre:bg-slate-900 prose-pre:border prose-pre:border-slate-700 prose-pre:rounded-xl
+      prose-blockquote:border-brand-500 prose-blockquote:bg-slate-900 prose-blockquote:rounded-r-lg prose-blockquote:py-1
+      prose-strong:text-white
+      prose-li:text-slate-300
+      prose-table:text-sm
+      prose-th:text-slate-300 prose-th:border-slate-700
+      prose-td:text-slate-400 prose-td:border-slate-800
+      prose-hr:border-slate-800">
+      <slot />
+    </article>
+
+    <!-- Navigation bottom -->
+    <div class="mt-16 pt-8 border-t border-slate-800 flex justify-between text-sm">
+      <a href={`${base}/modulos`} class="text-slate-400 hover:text-white transition-colors">← Todos los módulos</a>
+    </div>
+
+  </div>
+</Base>

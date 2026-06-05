@@ -1,0 +1,162 @@
+---
+layout: ../../layouts/Module.astro
+title: Claude Code para Diseñadores
+description: Usa Claude Code para automatizar tareas, editar archivos, generar código y trabajar con tu repositorio — desde la terminal, sin necesitar ser developer.
+module: 6
+level: advanced
+duration: 60 min
+---
+
+## ¿Qué es Claude Code?
+
+Claude Code es una herramienta de línea de comandos (CLI) que integra Claude directamente en tu terminal. A diferencia de claude.ai, Claude Code puede:
+
+- **Leer y editar archivos** de tu proyecto local
+- **Ejecutar comandos** del sistema
+- **Navegar tu repositorio** y entender la estructura del código
+- **Hacer commits** y trabajar con Git
+- **Instalar y correr scripts**
+
+Para un diseñador, esto significa poder automatizar tareas repetitivas que antes requerían a un developer.
+
+---
+
+## Casos de uso reales para diseñadores
+
+### 1. Renombrar archivos de assets en masa
+
+Tienes 200 iconos con nombres como `ic_arrow_right_24dp.svg` y los necesitas como `arrow-right.svg`:
+
+```
+Renombra todos los archivos SVG en la carpeta /assets/icons/
+Quita el prefijo "ic_" y el sufijo "_24dp", y convierte underscores a guiones.
+Muéstrame la lista de cambios antes de aplicarlos.
+```
+
+Claude Code hace la lista, te la muestra, y aplica los cambios solo si confirmas.
+
+---
+
+### 2. Auditar accesibilidad de un componente
+
+```
+Revisa el archivo src/components/Button.tsx
+¿Tiene los atributos de accesibilidad correctos?
+¿Falta algo según WCAG 2.1 AA?
+```
+
+Claude lee el archivo real y da feedback específico, no genérico.
+
+---
+
+### 3. Actualizar tokens de diseño en todo el proyecto
+
+Cuando cambia un color en tu design system:
+
+```
+El token de color "brand-primary" cambió de #4F6BF0 a #3B54D4.
+Encuéntralo en todos los archivos CSS y JS del proyecto y actualízalo.
+Muéstrame qué archivos cambiarías antes de hacerlo.
+```
+
+---
+
+### 4. Generar un componente desde tu design system
+
+```
+Crea el componente Tag.tsx en src/components/
+Debe seguir el patrón de los otros componentes en esa carpeta.
+Variantes: default, success, warning, error, info.
+Tamaños: sm, md.
+Usa los tokens de color de nuestro tema.
+```
+
+Claude lee los componentes existentes para entender los patrones y crea uno nuevo consistente.
+
+---
+
+### 5. Exportar documentación del design system
+
+```
+Lee todos los archivos en src/components/ y genera un archivo COMPONENTS.md
+con una tabla de todos los componentes: nombre, descripción breve, props principales.
+```
+
+---
+
+## Cómo instalar Claude Code
+
+**Paso 1 — Verificar Node:**
+```bash
+node --version
+# Debe mostrar v18 o superior
+```
+
+**Paso 2 — Instalar:**
+```bash
+npm install -g @anthropic-ai/claude-code
+```
+
+**Paso 3 — Autenticar:**
+```bash
+claude
+# La primera vez abrirá el navegador para vincular tu cuenta de Anthropic
+```
+
+**Paso 4 — Usar:**
+```bash
+# Navega a tu proyecto
+cd ~/proyectos/mi-design-system
+
+# Inicia Claude Code
+claude
+
+# Escribe tu tarea en lenguaje natural
+> Muéstrame la estructura de carpetas del proyecto
+```
+
+---
+
+## Comandos básicos de Claude Code
+
+| Comando | Qué hace |
+|---------|---------|
+| `claude` | Inicia sesión interactiva en el directorio actual |
+| `claude "tu tarea"` | Ejecuta una tarea específica y termina |
+| `/help` | Muestra los comandos disponibles |
+| `/clear` | Limpia la conversación actual |
+| `Ctrl+C` | Sale de Claude Code |
+
+---
+
+## Modo seguro: siempre revisar antes de aplicar
+
+Claude Code siempre muestra lo que va a hacer antes de hacerlo. Nunca aplica cambios sin tu confirmación cuando la acción es irreversible.
+
+Puedes pedirle explícitamente:
+
+```
+Antes de hacer cualquier cambio, muéstrame exactamente qué archivos modificarías
+y qué cambiarías en cada uno.
+```
+
+---
+
+## Ejercicio práctico
+
+1. **Instala Claude Code** siguiendo los pasos de arriba
+2. **Navega a un proyecto** donde tengas archivos de diseño o código
+3. **Prueba este prompt:**
+
+```
+Muéstrame todos los archivos en este proyecto que tengan colores hardcodeados
+(valores hex o rgb) en lugar de usar variables CSS o tokens de diseño.
+```
+
+4. **Si encuentra resultados**, pídele que te sugiera cómo refactorizarlos para usar tokens.
+
+---
+
+## Próximo módulo
+
+El **Módulo 07** cubre Skills y Claude Cowork: cómo crear flujos de trabajo personalizados y colaborar con Claude de forma más estructurada.

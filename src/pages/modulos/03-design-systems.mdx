@@ -1,0 +1,123 @@
+---
+layout: ../../layouts/Module.astro
+title: Claude y Design Systems
+description: Usa Claude para generar tokens de diseño, documentar componentes, mantener consistencia y escalar tu sistema.
+module: 3
+level: intermediate
+duration: 45 min
+---
+
+## Por qué Claude es un aliado natural de los design systems
+
+Un design system vive o muere por su **documentación**. Claude puede:
+
+- Generar documentación de componentes a partir de una descripción
+- Crear y mantener tokens de diseño (colores, tipografía, espaciado)
+- Revisar consistencia entre componentes
+- Traducir decisiones de diseño a especificaciones para desarrolladores
+- Generar variantes y estados de un componente sistemáticamente
+
+---
+
+## Generar una paleta de colores con tokens
+
+Puedes pedirle a Claude que diseñe un sistema de tokens de color completo:
+
+```
+Necesito definir los tokens de color para un design system de una app de fintech B2B.
+La marca es confiable, moderna y profesional. El color primario es #1A56DB.
+
+Genera:
+1. Escala semántica: primary, secondary, success, warning, error, neutral
+2. Para cada color: 9 tonos (50 a 900)
+3. Tokens de uso: background, surface, text, border, interactive
+Formato: JSON con nombres en kebab-case, compatible con CSS custom properties.
+```
+
+**Resultado esperado:** un objeto JSON listo para copiar a tu sistema de tokens (Tokens Studio, Style Dictionary, etc.)
+
+---
+
+## Documentar un componente
+
+Toma un componente existente y pídele a Claude que lo documente:
+
+```
+Documenta el componente "Button" de nuestro design system.
+Tiene estas variantes: primary, secondary, ghost, destructive.
+Tamaños: sm, md, lg.
+Estados: default, hover, active, disabled, loading.
+Se usa en formularios, modales y acciones principales de página.
+
+Escribe la documentación en Markdown con estas secciones:
+- Descripción y cuándo usarlo
+- Cuándo NO usarlo (anti-patterns)
+- Props/variantes con tabla
+- Guía de accesibilidad
+- Ejemplos de uso correcto e incorrecto
+```
+
+---
+
+## Revisar consistencia entre componentes
+
+Una de las cosas más poderosas: pegarle a Claude la descripción de varios componentes y pedirle que detecte inconsistencias.
+
+```
+Aquí están las especificaciones de spacing de tres componentes de nuestro sistema:
+
+Card: padding 16px, gap interno 12px
+Modal: padding 24px, gap interno 20px
+Drawer: padding 20px, gap interno 16px
+
+¿Detectas inconsistencias? ¿Cómo lo alinearías con una escala de espaciado basada en múltiplos de 4?
+```
+
+---
+
+## Crear un sistema de iconografía con criterios
+
+```
+Estamos definiendo los criterios para seleccionar y usar iconos en nuestro design system.
+Usamos la librería Lucide Icons. Los productos son dashboards B2B de alta densidad de información.
+
+Crea una guía de uso de iconos que incluya:
+1. Tamaños permitidos y cuándo usar cada uno
+2. Criterios para elegir un icono (claridad, familiaridad)
+3. Reglas de uso con texto vs. solo icono
+4. Accesibilidad (aria-label, tooltips obligatorios)
+5. Los 20 iconos más comunes en dashboards y sus nombres en Lucide
+```
+
+---
+
+## Workflow con Figma + Claude
+
+Un flujo de trabajo efectivo:
+
+1. **Diseñas** el componente en Figma
+2. **Describes** el componente a Claude (o adjunta un screenshot)
+3. **Pides** documentación, especificaciones dev, o análisis de accesibilidad
+4. **Copias** el resultado a tu wiki (Notion, Confluence, Zeroheight)
+5. **Iteras** pidiéndole ajustes al tono o nivel de detalle
+
+> **Tip:** Puedes adjuntar imágenes directamente a Claude. Toma screenshot de tu componente en Figma y dile: *"Este es el componente Card de nuestro design system. Documéntalo."*
+
+---
+
+## Ejercicio práctico
+
+Elige un componente que uses frecuentemente (Input, Card, Tag, Badge, etc.) y haz lo siguiente:
+
+1. Describe el componente a Claude con todas sus variantes y estados
+2. Pídele que genere la documentación completa en Markdown
+3. Pídele que identifique **estados que te faltaron** documentar
+4. Pídele que escriba **las notas de accesibilidad** siguiendo WCAG 2.1
+
+Al final tendrás una documentación lista para copiar a tu wiki de design system.
+
+---
+
+## Próximo módulo
+
+El **Módulo 04** explica Claude Projects: cómo crear un espacio dedicado para cada cliente o producto, con contexto persistente.
