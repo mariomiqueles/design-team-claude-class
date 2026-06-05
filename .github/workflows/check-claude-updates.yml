@@ -1,5 +1,7 @@
 name: Check Claude Updates
 
+# Deshabilitado temporalmente hasta configurar ANTHROPIC_API_KEY
+# Para activar: quita el "if: false" del job check-updates
 on:
   schedule:
     # Runs every day at 9am UTC (6am Chile time)
@@ -8,21 +10,21 @@ on:
 
 jobs:
   check-updates:
+    if: false  # deshabilitado hasta tener API key configurada
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
-      - run: npm ci
+      - run: npm install --legacy-peer-deps
 
       - name: Check for Claude updates and update changelog
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           NOTIFY_EMAIL: ${{ secrets.NOTIFY_EMAIL }}
         run: node scripts/check-updates.mjs
 
