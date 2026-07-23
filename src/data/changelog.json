@@ -1,5 +1,16 @@
 [
   {
+    "date": "2026-07-22",
+    "version": "SDK v0.113.0",
+    "title": "Actualización del SDK de Anthropic v0.113.0",
+    "summary": "Se publicó una nueva versión del SDK de Anthropic (v0.113.0). Esto puede incluir soporte para nuevos modelos de Claude, mejoras en la API o correcciones. Revisa los módulos avanzados para ver si hay nuevas funciones que aprender.",
+    "modules": [
+      "Módulo 06",
+      "Módulo 07",
+      "Módulo 08"
+    ]
+  },
+  {
     "date": "2026-07-21",
     "version": "SDK v0.112.5",
     "title": "Actualización del SDK de Anthropic v0.112.5",
